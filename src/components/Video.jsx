@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 //api functions
 import { fetchVideo } from "../services/fetchFromAPI";
 //components
 import ReactPlayer from "react-player";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 //functions
-import { reduceTitle } from "../services/functions";
+import { reduceTitle, setViews } from "../services/functions";
 
 const Video = () => {
   const { id } = useParams();
@@ -52,6 +53,48 @@ const Video = () => {
           >
             {more ? "less" : "more"}
           </button>
+        </div>
+      </div>
+      <div className="px-3 mt-8 mb-3">
+        <hr />
+        <p className="font-semibold text-2xl capitalize">related videos</p>
+        <hr />
+      </div>
+      <div className="flex items-center flex-col">
+        <div className="flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-2 gap-y- p-3">
+          {videoRelatedContents.map((el, i) => {
+            if (el.type === "video") {
+              const {
+                author,
+                publishedTimeText,
+                stats,
+                thumbnails,
+                title,
+                videoId,
+              } = el.video;
+              return (
+                <Link to={`/video/${videoId}`} key={i} className="">
+                  <img
+                    className="w-[290px] cursor-pointer"
+                    src={thumbnails[1].url}
+                    alt={title}
+                  />
+                  <div className="h-[110px] w-[290px]">
+                    <p className="font-semibold">{reduceTitle(title)}</p>
+                    <div className="flex items-center">
+                      <p className="text-gray-500 text-sm">{author.title}</p>
+                      <BsFillCheckCircleFill className="fill-gray-400 ml-1 text-sm" />
+                    </div>
+                    <p className="text-gray-500 text-sm">
+                      {setViews(stats.views)} views / {publishedTimeText}
+                    </p>
+                  </div>
+                </Link>
+              );
+            } else {
+              return null;
+            }
+          })}
         </div>
       </div>
     </div>
