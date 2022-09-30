@@ -5,6 +5,7 @@ import { fetchVideo } from "../services/fetchFromAPI";
 //components
 import ReactPlayer from "react-player";
 import { BsFillCheckCircleFill } from "react-icons/bs";
+import Loader from "./Loader";
 //functions
 import { reduceTitle, setViews } from "../services/functions";
 
@@ -18,8 +19,9 @@ const Video = () => {
     };
     fetchData();
   }, [id]);
-  if (!videoDetails) return "Loading...";
-  if (!videoRelatedContents) return "Loading...";
+  if (!videoDetails) return <Loader text={"Loading Video..."} />;
+  if (!videoRelatedContents)
+    return <Loader text={"Loading Related Videos..."} />;
   const { description, publishedDate, stats, title, videoId } = videoDetails;
   return (
     <div className="max-w-[1200px] mx-auto">

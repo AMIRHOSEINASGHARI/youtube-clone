@@ -5,6 +5,7 @@ import { fetchChannel } from "../services/fetchFromAPI";
 //components
 import { IoIosArrowRoundBack } from "react-icons/io";
 import ChannelVideos from "./ChannelVideos";
+import Loader from "./Loader";
 
 const ChannelDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const ChannelDetails = () => {
     };
     fetchData();
   }, [id]);
-  if (!channelDetails) return "Loading...";
+  if (!channelDetails) return <Loader text={"Loading Channel Details..."} />;
   return (
     <div className="max-w-[1200px] mx-auto">
       <div>

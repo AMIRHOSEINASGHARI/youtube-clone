@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 //components
 import Sidebar from "./Sidebar";
 import HomeDetails from "./HomeDetails";
+import Loader from "./Loader";
 //api functions
 import { fetchSearch } from "../services/fetchFromAPI";
 
@@ -17,7 +18,7 @@ const Home = () => {
   return (
     <div className="max-w-[1400px] mx-auto">
       <Sidebar setSelectedCategory={setSelectedCategory} />
-      {homeVideos.length === 0 && "Loading..."}
+      {homeVideos.length === 0 && <Loader text={"Loading Videos..."} />}
       {homeVideos.length !== 0 && (
         <div className="lg:pl-48 lg:pt-2 min-h-screen">
           <h1 className="px-4 mt-1 text-xl">
