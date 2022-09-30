@@ -17,7 +17,7 @@ const ChannelDetails = () => {
   }, [id]);
   if (!channelDetails) return "Loading...";
   return (
-    <div>
+    <div className="max-w-[1200px] mx-auto">
       <div>
         {channelDetails.banner && (
           <img
