@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //constant file for sidebar
 import { categories } from "../services/constants";
 
-const Sidebar = () => {
+const Sidebar = ({ setSelectedCategory }) => {
   const [index, setIndex] = useState(0);
   return (
     <div className="flex overflow-auto py-3 mx-4 bg-white lg:mx-2 lg:fixed lg:top-18 lg:pt-2 lg:pb-0 lg:pr-3 lg:h-[87vh] lg:block lg:border-r">
@@ -11,6 +11,7 @@ const Sidebar = () => {
         return (
           <div
             onClick={() => {
+              setSelectedCategory(name);
               setIndex(i);
             }}
             key={i}
