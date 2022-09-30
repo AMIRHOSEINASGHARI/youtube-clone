@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 //components
 import Home from "./components/Home";
@@ -8,9 +8,10 @@ import Video from "./components/Video";
 import SearchedVideo from "./components/SearchedVideo";
 
 const App = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
-      <Header />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/channel/:id" element={<ChannelDetails />} />
